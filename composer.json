@@ -1,0 +1,31 @@
+{
+    "name": "ojezu/configurable-discrimination-bundle",
+    "description": "Symfony2 bundle that allows configuring Doctrine discrimination maps in children bundles.",
+    "autoload": {
+        "psr-4": { "OJezu\\ConfigurableDiscriminationBundle\\": "src/" }
+    },
+    "authors": [
+        {
+            "name": "Krzysztof Chrapka",
+            "email": "composer@ojezu.org"
+        }
+    ],
+    "require": {
+        "doctrine/orm": "^2.5",
+        "symfony/dependency-injection": "^2.7",
+        "symfony/http-kernel": "^2.7",
+        "symfony/config": "^2.7"
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^2.3"
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "tool/install-hooks"
+        ],
+        "test": [
+            "tool/verify-all"
+        ]
+    },
+    "license": "MIT"
+}
