@@ -64,7 +64,7 @@ class DiscriminatorListener implements EventSubscriber
 
         if (array_key_exists($className, $this->map)) {
             $discriminatorMap = $metadata->discriminatorMap;
-            $discriminatorMap = array_merge($discriminatorMap, $this->map[$className]);
+            $discriminatorMap = $discriminatorMap + $this->map[$className];
             $metadata->setDiscriminatorMap($discriminatorMap);
         }
     }
