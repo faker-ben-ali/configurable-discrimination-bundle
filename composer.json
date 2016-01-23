@@ -12,9 +12,9 @@
     ],
     "require": {
         "doctrine/orm": "^2.5",
-        "symfony/dependency-injection": "^2.7",
-        "symfony/http-kernel": "^2.7",
-        "symfony/config": "^2.7"
+        "symfony/dependency-injection": "^3.0 || ^2.7",
+        "symfony/http-kernel": "^3.0 || ^2.7",
+        "symfony/config": "^3.0 || ^2.7"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "^2.3"

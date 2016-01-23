@@ -17,6 +17,12 @@ child bundle configuration - making the code of parent bundle clear of any
 references to children bundles, avoids scanning all class files in search of
 children classes and allows specifying custom discriminator values.
 
+Installation
+==
+```sh
+composer require ojezu/configurable-discrimination-bundle
+```
+
 Usage
 ==
 
@@ -69,7 +75,7 @@ Name of the service does not matter.
 ```php
 # service.yml
 services:
-    acme.acme_entity.link_task_state:
+    acme.acme_entity.acme_child_a:
         class: 'Acme\AcmeChildA\Entity\AcmeChildA'
         public: false
         tags:
@@ -86,7 +92,7 @@ In ChildBBundle:
 ```php
 # service.yml
 services:
-    acme.acme_entity.link_task_state:
+    acme.acme_entity.acme_child_b:
         class: 'Acme\AcmeChildB\Entity\AcmeChildB'
         public: false
         tags:
