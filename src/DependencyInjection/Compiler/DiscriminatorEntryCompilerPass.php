@@ -29,10 +29,14 @@ class DiscriminatorEntryCompilerPass implements CompilerPassInterface
             $childClassSpec = $tags[0];
             $childEntityName = $container->getDefinition($serviceName)->getClass();
 
-            if (array_key_exists('parent_class', $childClassSpec) && $childClassSpec['parnet_class']) {
+            if (array_key_exists('parent_class', $childClassSpec) && $childClassSpec['parent_class']) {
                 $parentEntityName = $childClassSpec['parent_class'];
             } else {
                 $parentEntityName = get_parent_class($childEntityName);
+            }
+
+            if (!$parentEntityName) {
+                throw new \Exception('Cannot find parent class for entity »'.$childEntityName.'«');
             }
 
             $discriminatorValue = $childClassSpec['discriminator_value'];
