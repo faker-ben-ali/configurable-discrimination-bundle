@@ -12,6 +12,25 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
  */
 class DiscriminatorEntryCompilerPass implements CompilerPassInterface
 {
+    /**
+     * Map has following format:
+     *
+     *  [
+     *    `parent class name 1` => [
+     *      'discriminator value 1' => 'child className 1',
+     *      'discriminator value 2' => 'child className 2',
+     *      'discriminator value 3' => 'child className 3',
+     *      (...)
+     *    ],
+     *    `parent class name 2` => [
+     *      'discriminator value 1' => 'child className 1',
+     *      'discriminator value 2' => 'child className 2',
+     *    ],
+     *    (...)
+     *  ]
+     *
+     * @var string[][]
+     */
     private $map = [];
 
     /**
@@ -29,23 +48,19 @@ class DiscriminatorEntryCompilerPass implements CompilerPassInterface
             $childClassSpec = $tags[0];
             $childEntityName = $container->getDefinition($serviceName)->getClass();
 
-            if (array_key_exists('parent_class', $childClassSpec) && $childClassSpec['parent_class']) {
-                $parentEntityName = $childClassSpec['parent_class'];
-            } else {
-                $parentEntityName = get_parent_class($childEntityName);
-            }
-
-            if (!$parentEntityName) {
-                throw new \Exception('Cannot find parent class for entity »'.$childEntityName.'«');
-            }
-
             $discriminatorValue = $childClassSpec['discriminator_value'];
 
-            if (!array_key_exists($parentEntityName, $this->map)) {
-                $this->map[$parentEntityName] = [];
+            // Doctrine at this point (in compiler pass) does not expose any good way to determine
+            // which of parent classes is top of Entity hierarchy. So, at cost of a bigger parameter
+            // just specify children for ALL parents.
+            foreach (class_parents($childEntityName) as $parentClassName) {
+                if (!array_key_exists($parentClassName, $this->map)) {
+                    $this->map[$parentClassName] = [];
+                }
+
+                $this->map[$parentClassName][$discriminatorValue] = $childEntityName;
             }
 
-            $this->map[$parentEntityName][$discriminatorValue] = $childEntityName;
         }
 
         $container->setParameter(

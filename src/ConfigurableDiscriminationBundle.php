@@ -6,7 +6,6 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 use OJezu\ConfigurableDiscriminationBundle\DependencyInjection\Compiler\DiscriminatorEntryCompilerPass;
-use OJezu\ConfigurableDiscriminationBundle\DependencyInjection\ConfigurableDiscriminationExtension;
 
 /**
  * @inheritdoc

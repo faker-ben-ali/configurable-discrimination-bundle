@@ -4,7 +4,8 @@ parameters:
 services:
     configurable_discrimination.listener.doctrine_event_listener:
         class: 'OJezu\ConfigurableDiscriminationBundle\Listener\DiscriminatorListener'
-        arguments: [%ojezu.configurable_discrimination.mapper%]
+        arguments:
+            - '%ojezu.configurable_discrimination.mapper%'
         public: false
         tags:
-            - { name: doctrine.event_listener, event: loadClassMetadata }
+            - { name: 'doctrine.event_listener', event: 'loadClassMetadata' }
