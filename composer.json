@@ -3,7 +3,7 @@
     "type":"symfony-bundle",
     "description": "Symfony2 bundle that allows configuring Doctrine discrimination maps in children bundles.",
     "autoload": {
-        "psr-4": { "OJezu\\ConfigurableDiscriminationBundle\\": "src/" }
+        "psr-4": { "OJezu\\ConfigurableDiscriminationBundle\\": "/" }
     },
     "authors": [
         {
