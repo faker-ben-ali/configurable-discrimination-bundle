@@ -1,5 +1,6 @@
 {
     "name": "ojezu/configurable-discrimination-bundle",
+    "type":"symfony-bundle",
     "description": "Symfony2 bundle that allows configuring Doctrine discrimination maps in children bundles.",
     "autoload": {
         "psr-4": { "OJezu\\ConfigurableDiscriminationBundle\\": "src/" }
